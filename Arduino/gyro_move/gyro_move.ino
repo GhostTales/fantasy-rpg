@@ -8,10 +8,11 @@
 
 Adafruit_MPU6050 mpu;
 sensors_event_t g, a, temp;
-int i, j;
+int x[2], y[2], index;
+int j,k;
 
 int XCoord = 0, YCoord = 0;
-float ScreenX = 1920, ScreenY = 1080; //mouse.move works with screen being 1920x1080 even on 2560x1440 screens or larger as it does not use pixel coordinates
+float ScreenX, ScreenY; //mouse.move works with screen being 1920x1080 even on 2560x1440 screens or larger as it does not use pixel coordinates
 
 void setup(void) {
   Serial.begin(115200);
@@ -38,19 +39,30 @@ void loop() {
 
   /* Get new sensor events with the readings */
   mpu.getEvent(&g, &a, &temp);
- 
-  while (i < 100) {
-  Mouse.move(-100,-100,0);
-  i++;
-  } 
-  while (j < 10) {
-    Mouse.move(96, 54,0);
-    j++;
+
+  ScreenX = constrain((1920 / 10.0) * constrain(g.gyro.y, -10, 10), -960, 960) + 960;
+  ScreenY = constrain((1080 / 10.0) * constrain(g.gyro.z, -10, 10), -540, 540) + 540;
+
+  
+  
+  while(j < 20) {
+  Mouse.move(-100, -100, 0);
+  j++;
   }
+  
+  while(k < 20) {
+  Mouse.move((ScreenX / 20), (ScreenY / 20), 0);
+  x[k % 2] = ScreenX;
+  y[k % 2] = ScreenY;
+  k++;
+  }
+  
+  x[index % 2] = ScreenX;
+  y[index % 2] = ScreenY;
+  
+  index++;
 
-  ScreenX = constrain((1920 / 10.0) * constrain(g.gyro.y, -10, 10), -960, 960);
-  ScreenY = constrain((1080 / 10.0) * constrain(g.gyro.z, -10, 10), -540, 540);
-
+  Mouse.move((x[(index - 1) % 2] - x[index % 2]), (y[(index - 1) % 2] - y[index % 2]),0);
 
   Serial.print("X = ");
   Serial.print(ScreenX);

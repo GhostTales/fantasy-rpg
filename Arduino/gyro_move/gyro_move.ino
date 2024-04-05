@@ -8,7 +8,8 @@
 
 Adafruit_MPU6050 mpu;
 sensors_event_t g, a, temp;
-int x[2], y[2], index;
+float x[2], y[2]; 
+int index, arrSize = 2;
 int j,k;
 
 int XCoord = 0, YCoord = 0;
@@ -40,8 +41,8 @@ void loop() {
   /* Get new sensor events with the readings */
   mpu.getEvent(&g, &a, &temp);
 
-  ScreenX = constrain((1920 / 10.0) * constrain(g.gyro.y, -10, 10), -960, 960) + 960;
-  ScreenY = constrain((1080 / 10.0) * constrain(g.gyro.z, -10, 10), -540, 540) + 540;
+  ScreenX = constrain(1920 / 10 * constrain(g.gyro.y, -10, 10), -1920, 1920) + 960;
+  ScreenY = constrain(1080 / 10 * constrain(g.gyro.z, -10, 10), -1080, 1080) + 540;
 
   
   
@@ -52,53 +53,44 @@ void loop() {
   
   while(k < 20) {
   Mouse.move((ScreenX / 20), (ScreenY / 20), 0);
-  x[k % 2] = ScreenX;
-  y[k % 2] = ScreenY;
+  x[k % arrSize] = ScreenX;
+  y[k % arrSize] = ScreenY;
   k++;
   }
   
-  x[index % 2] = ScreenX;
-  y[index % 2] = ScreenY;
+  x[index % arrSize] = ScreenX;
+  y[index % arrSize] = ScreenY;
   
   index++;
 
-  Mouse.move((x[(index - 1) % 2] - x[index % 2]), (y[(index - 1) % 2] - y[index % 2]),0);
+  for(int i = 0; i<20; i++) {
+  Mouse.move((x[(index - 1) % 2] - x[index % 2]) / 20, (y[(index - 1) % 2] - y[index % 2]) / 20,0);
+  delay(5);
+  }
 
   Serial.print("X = ");
   Serial.print(ScreenX);
   Serial.print("\t");
   Serial.print("Y = ");
-  Serial.println(ScreenY);
-
-  //data();
+  Serial.print(ScreenY);
+  Serial.print("\t");
+  Serial.print("moved X = ");
+  Serial.print(x[(index - 1) % 2] - x[index % 2]);
+  Serial.print("\t");
+  Serial.print("moved Y = ");
+  Serial.println(y[(index - 1) % 2] - y[index % 2]);
 
   //Mouse.move(rounds(a.acceleration.z) * -1, rounds(a.acceleration.y) * -1 +1, 0);
-  delay(10);
+  //delay(10);
 }
 
+float average(int arr[], int length) {
+  if (length == 0) return 0; // Check to avoid division by zero
+  
+  float avg = 0.0;
 
-int rounds(float value) {
-  return round(value * 10);
-}
-
-void data() {
-  /* Print out the values */
-  Serial.print("X = ");
-  Serial.print(rounds(a.acceleration.x));
-  Serial.print("\t");
-  Serial.print("Y = ");
-  Serial.print(rounds(a.acceleration.y));
-  Serial.print("\t");
-  Serial.print("Z = ");
-  Serial.print(rounds(a.acceleration.z));
-  Serial.print("\t");
-  Serial.print("XG = ");
-  Serial.print(constrain(g.gyro.x, -10, 10));
-  Serial.print("\t");
-  Serial.print("YG = ");
-  Serial.print(constrain(g.gyro.y, -10, 10));
-  Serial.print("\t");
-  Serial.print("ZG = ");
-  Serial.println(constrain(g.gyro.z, -10, 10));
-
+  for(int i = 0; i < length; i++) {
+    avg += arr[i];
+  }
+  return avg / length;
 }

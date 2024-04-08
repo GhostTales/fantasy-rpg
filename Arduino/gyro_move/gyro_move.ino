@@ -3,8 +3,10 @@
 #include <Adafruit_MPU6050.h>
 #include <Adafruit_Sensor.h>
 #include <Mouse.h>
-#include <Wire.h>
 #include <math.h>
+
+#define BUTTON_PIN 5
+#define BUTTON_PIN2 6
 
 Adafruit_MPU6050 mpu;
 sensors_event_t g, a, temp;
@@ -17,6 +19,8 @@ float ScreenX, ScreenY; //mouse.move works with screen being 1920x1080 even on 2
 
 void setup(void) {
   Serial.begin(115200);
+  pinMode(BUTTON_PIN, INPUT_PULLUP);
+  pinMode(BUTTON_PIN2, INPUT_PULLUP);
   while (!Serial) {
     delay(10); // will pause Zero, Leonardo, etc until serial console opens
   }
@@ -78,7 +82,13 @@ void loop() {
   Serial.print(x[(index - 1) % 2] - x[index % 2]);
   Serial.print("\t");
   Serial.print("moved Y = ");
-  Serial.println(y[(index - 1) % 2] - y[index % 2]);
+  Serial.print(y[(index - 1) % 2] - y[index % 2]);
+  Serial.print("\t");
+  Serial.print("button1 = ");
+  Serial.print(digitalRead(BUTTON_PIN));
+  Serial.print("\t");
+  Serial.print("button2 = ");
+  Serial.println(digitalRead(BUTTON_PIN2));
 
   //Mouse.move(rounds(a.acceleration.z) * -1, rounds(a.acceleration.y) * -1 +1, 0);
   //delay(10);

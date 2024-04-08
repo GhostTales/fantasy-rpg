@@ -19,8 +19,8 @@ float ScreenX, ScreenY; //mouse.move works with screen being 1920x1080 even on 2
 
 void setup(void) {
   Serial.begin(115200);
-  pinMode(BUTTON_PIN, INPUT_PULLUP);
-  pinMode(BUTTON_PIN2, INPUT_PULLUP);
+  pinMode(BUTTON_PIN, INPUT);
+  pinMode(BUTTON_PIN2, INPUT);
   while (!Serial) {
     delay(10); // will pause Zero, Leonardo, etc until serial console opens
   }
@@ -48,19 +48,18 @@ void loop() {
   ScreenX = constrain(1920 / 10 * constrain(g.gyro.y, -10, 10), -1920, 1920) + 960;
   ScreenY = constrain(1080 / 10 * constrain(g.gyro.z, -10, 10), -1080, 1080) + 540;
 
-  
-  
-  while(j < 20) {
-  Mouse.move(-100, -100, 0);
-  j++;
+  if (digitalRead(BUTTON_PIN2) == HIGH) {
+    j = 0;
+    k = 0;
+    Calibrate();
+  }
+
+  if (digitalRead(BUTTON_PIN) == HIGH) {
+    Mouse.click(MOUSE_LEFT);
   }
   
-  while(k < 20) {
-  Mouse.move((ScreenX / 20), (ScreenY / 20), 0);
-  x[k % arrSize] = ScreenX;
-  y[k % arrSize] = ScreenY;
-  k++;
-  }
+  
+  Calibrate();
   
   x[index % arrSize] = ScreenX;
   y[index % arrSize] = ScreenY;
@@ -94,13 +93,17 @@ void loop() {
   //delay(10);
 }
 
-float average(int arr[], int length) {
-  if (length == 0) return 0; // Check to avoid division by zero
+void Calibrate() {
   
-  float avg = 0.0;
-
-  for(int i = 0; i < length; i++) {
-    avg += arr[i];
+  while(j < 20) {
+  Mouse.move(-100, -100, 0);
+  j++;
   }
-  return avg / length;
+  
+  while(k < 20) {
+  Mouse.move((ScreenX / 20), (ScreenY / 20), 0);
+  x[k % arrSize] = ScreenX;
+  y[k % arrSize] = ScreenY;
+  k++;
+  }
 }

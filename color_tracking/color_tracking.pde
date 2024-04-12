@@ -8,10 +8,10 @@ import processing.video.*;
 Capture video;
 
 color trackColor; 
-float threshold = 55;
+float threshold = 10;
 
 void setup() {
-  size(640, 360);
+  size(640, 480);
   String[] cameras = Capture.list();
   printArray(cameras);
   video = new Capture(this, "pipeline:autovideosrc");
@@ -28,7 +28,7 @@ void draw() {
   image(video, 0, 0);
 
   //threshold = map(mouseX, 0, width, 0, 100);
-  threshold = 80;
+  threshold = 10;
 
   float avgX = 0;
   float avgY = 0;
@@ -83,4 +83,5 @@ void mousePressed() {
   // Save color where the mouse is clicked in trackColor variable
   int loc = mouseX + mouseY*video.width;
   trackColor = video.pixels[loc];
+  println(red(trackColor) + ", " + green(trackColor) + ", " + blue(trackColor));
 }

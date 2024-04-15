@@ -12,6 +12,8 @@ public partial class task_adder : Panel
 	PackedScene scene;
 	[Export]
 	Node column;
+	[Export]
+	LineEdit lineEdit;
 	public override void _Ready()
 	{
 		add_button = GetNode<Button>("Button");
@@ -25,6 +27,6 @@ public partial class task_adder : Panel
 	public void _on_button_pressed()
 	{
 		column.AddChild(scene.Instantiate());
-		GD.Print($"added {scene.Instantiate().Name} to {column.Name}");
+		GD.Print($"added {scene.Instantiate().Name} to {column.Name}({lineEdit.Text})");
 	}
 }

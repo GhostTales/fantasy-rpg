@@ -3,12 +3,12 @@
 [ext_resource type="Script" path="res://scripts/task_adder.cs" id="1_hmbfa"]
 [ext_resource type="PackedScene" uid="uid://cg57tcoeui0dy" path="res://scenes/board_task.tscn" id="2_xgool"]
 
-[node name="MarginContainer" type="MarginContainer"]
+[node name="board_Column" type="MarginContainer"]
 offset_right = 40.0
 offset_bottom = 40.0
 theme_override_constants/margin_right = 5
 
-[node name="task_adder" type="Panel" parent="." node_paths=PackedStringArray("column")]
+[node name="task_adder" type="Panel" parent="." node_paths=PackedStringArray("column", "lineEdit")]
 custom_minimum_size = Vector2(225, 30)
 layout_direction = 2
 layout_mode = 2
@@ -17,6 +17,7 @@ size_flags_vertical = 0
 script = ExtResource("1_hmbfa")
 scene = ExtResource("2_xgool")
 column = NodePath("ScrollContainer/MarginContainer/board_Column")
+lineEdit = NodePath("LineEdit")
 
 [node name="Button" type="Button" parent="task_adder"]
 layout_mode = 0
@@ -25,7 +26,7 @@ offset_top = 5.0
 offset_right = 220.0
 offset_bottom = 25.0
 
-[node name="Label" type="LineEdit" parent="task_adder"]
+[node name="LineEdit" type="LineEdit" parent="task_adder"]
 layout_mode = 0
 offset_right = 195.0
 offset_bottom = 30.0

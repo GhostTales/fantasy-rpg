@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://scripts/board_task.cs" id="1_leqaj"]
 
-[node name="Node2D" type="Control"]
-custom_minimum_size = Vector2(0, 85)
+[node name="board_Task" type="Control"]
+custom_minimum_size = Vector2(0, 75)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 200.0

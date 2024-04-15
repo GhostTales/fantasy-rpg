@@ -1,5 +1,37 @@
-[gd_scene format=3 uid="uid://b5mtb3wahsgyl"]
+[gd_scene load_steps=3 format=3 uid="uid://b5mtb3wahsgyl"]
 
-[node name="board_Row" type="HBoxContainer"]
-offset_right = 40.0
-offset_bottom = 40.0
+[ext_resource type="Script" path="res://scripts/column_adder.cs" id="1_om2n6"]
+[ext_resource type="PackedScene" uid="uid://b8amy42wauyrr" path="res://scenes/board_column.tscn" id="2_p4gdx"]
+
+[node name="column_adder" type="Button" node_paths=PackedStringArray("row")]
+custom_minimum_size = Vector2(30, 30)
+offset_right = 30.0
+offset_bottom = 30.0
+script = ExtResource("1_om2n6")
+scene = ExtResource("2_p4gdx")
+row = NodePath("ScrollContainer/MarginContainer/board_Row")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+show_behind_parent = true
+clip_contents = false
+custom_minimum_size = Vector2(1100, 0)
+layout_direction = 2
+layout_mode = 2
+offset_left = 35.0
+offset_top = -10.0
+offset_right = 1135.0
+offset_bottom = -2.0
+
+[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_constants/margin_top = 10
+
+[node name="board_Row" type="HBoxContainer" parent="ScrollContainer/MarginContainer"]
+custom_minimum_size = Vector2(200, 30)
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

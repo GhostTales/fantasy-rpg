@@ -1,8 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://dxrbrvxvd2k1a"]
+[gd_scene load_steps=2 format=3 uid="uid://dxrbrvxvd2k1a"]
 
 [ext_resource type="PackedScene" uid="uid://b5mtb3wahsgyl" path="res://scenes/board_row.tscn" id="1_afhiy"]
-[ext_resource type="PackedScene" uid="uid://b8amy42wauyrr" path="res://scenes/board_column.tscn" id="1_ap35k"]
-[ext_resource type="PackedScene" uid="uid://cg57tcoeui0dy" path="res://scenes/board_task.tscn" id="2_6h2em"]
 
 [node name="Main Board" type="Control"]
 layout_mode = 3
@@ -12,29 +10,7 @@ anchors_preset = 0
 layout_mode = 0
 offset_left = 25.0
 offset_top = 25.0
-offset_right = 65.0
-offset_bottom = 65.0
+offset_right = 33.0
+offset_bottom = 33.0
 
-[node name="board_Column" parent="board_Row" instance=ExtResource("1_ap35k")]
-layout_mode = 2
-
-[node name="Node2D" parent="board_Row/board_Column" instance=ExtResource("2_6h2em")]
-layout_mode = 2
-
-[node name="Node2D2" parent="board_Row/board_Column" instance=ExtResource("2_6h2em")]
-layout_mode = 2
-
-[node name="Node2D3" parent="board_Row/board_Column" instance=ExtResource("2_6h2em")]
-layout_mode = 2
-
-[node name="board_Column2" parent="board_Row" instance=ExtResource("1_ap35k")]
-layout_mode = 2
-
-[node name="Node2D" parent="board_Row/board_Column2" instance=ExtResource("2_6h2em")]
-layout_mode = 2
-
-[node name="Node2D2" parent="board_Row/board_Column2" instance=ExtResource("2_6h2em")]
-layout_mode = 2
-
-[node name="Node2D3" parent="board_Row/board_Column2" instance=ExtResource("2_6h2em")]
-layout_mode = 2
+[editable path="board_Row"]

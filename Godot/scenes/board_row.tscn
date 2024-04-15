@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://b5mtb3wahsgyl"]
+
+[node name="board_Row" type="HBoxContainer"]
+offset_right = 40.0
+offset_bottom = 40.0

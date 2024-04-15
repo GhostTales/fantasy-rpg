@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cg57tcoeui0dy"]
 
-[ext_resource type="Script" path="res://board_task.cs" id="1_rysj2"]
+[ext_resource type="Script" path="res://scripts/board_task.cs" id="1_leqaj"]
 
 [node name="Node2D" type="Control"]
 custom_minimum_size = Vector2(0, 85)
@@ -8,7 +8,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 200.0
 offset_bottom = 75.0
-script = ExtResource("1_rysj2")
+script = ExtResource("1_leqaj")
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0

@@ -15,9 +15,9 @@ row = NodePath("Control/ScrollContainer/MarginContainer/board_Row")
 clip_contents = true
 custom_minimum_size = Vector2(1885, 1090)
 anchors_preset = 0
-offset_left = 30.0
+offset_left = 40.0
 offset_top = -10.0
-offset_right = 1915.0
+offset_right = 1925.0
 offset_bottom = 1080.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Control"]
@@ -26,8 +26,7 @@ clip_contents = false
 custom_minimum_size = Vector2(1900, 0)
 layout_direction = 2
 layout_mode = 2
-offset_left = 5.0
-offset_right = 1905.0
+offset_right = 1900.0
 offset_bottom = 8.0
 
 [node name="MarginContainer" type="MarginContainer" parent="Control/ScrollContainer"]

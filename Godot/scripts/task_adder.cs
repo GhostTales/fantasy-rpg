@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class task_adder : ColorRect
+public partial class task_adder : Panel
 {
 	// Called when the node enters the scene tree for the first time.
 

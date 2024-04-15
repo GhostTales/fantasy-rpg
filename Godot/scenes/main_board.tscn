@@ -12,5 +12,3 @@ offset_left = 25.0
 offset_top = 25.0
 offset_right = 33.0
 offset_bottom = 33.0
-
-[editable path="board_Row"]

@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://dxrbrvxvd2k1a"]
+
+[ext_resource type="PackedScene" uid="uid://b8amy42wauyrr" path="res://board_column.tscn" id="1_8tpxk"]
+[ext_resource type="PackedScene" uid="uid://cg57tcoeui0dy" path="res://board_task.tscn" id="1_rmm71"]
+
+[node name="Main Board" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="board_Column" parent="." instance=ExtResource("1_8tpxk")]
+layout_mode = 2
+offset_left = 108.0
+offset_top = 15.0
+offset_right = 318.0
+offset_bottom = 189.0
+
+[node name="Node2D" parent="board_Column" instance=ExtResource("1_rmm71")]
+layout_mode = 2
+
+[node name="Node2D2" parent="board_Column" instance=ExtResource("1_rmm71")]
+layout_mode = 2
+
+[node name="Node2D3" parent="board_Column" instance=ExtResource("1_rmm71")]
+layout_mode = 2

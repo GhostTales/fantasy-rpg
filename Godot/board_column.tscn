@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://b8amy42wauyrr"]
+
+[node name="board_Column" type="VBoxContainer"]

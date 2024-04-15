@@ -8,6 +8,8 @@ custom_minimum_size = Vector2(200, 30)
 layout_direction = 2
 offset_right = 200.0
 offset_bottom = 30.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
 color = Color(0.180392, 0.180392, 0.180392, 1)
 script = ExtResource("1_hmbfa")
 scene = ExtResource("2_xgool")
@@ -29,7 +31,8 @@ offset_bottom = 29.0
 text = "new column"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
-custom_minimum_size = Vector2(200, 600)
+custom_minimum_size = Vector2(200, 1050)
+layout_mode = 0
 offset_top = 34.0
 offset_right = 200.0
 offset_bottom = 34.0

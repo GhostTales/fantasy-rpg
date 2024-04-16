@@ -1,12 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://b5mtb3wahsgyl"]
+[gd_scene load_steps=5 format=3 uid="uid://b5mtb3wahsgyl"]
 
+[ext_resource type="StyleBox" uid="uid://cddugynddpxmr" path="res://tres textures/button_normal.tres" id="1_kqn4p"]
 [ext_resource type="Script" path="res://scripts/column_adder.cs" id="1_om2n6"]
+[ext_resource type="StyleBox" uid="uid://cutwgwhu07g4d" path="res://tres textures/button_hover.tres" id="2_bj5rc"]
 [ext_resource type="PackedScene" uid="uid://b8amy42wauyrr" path="res://scenes/board_column.tscn" id="2_p4gdx"]
 
 [node name="column_adder" type="Button" node_paths=PackedStringArray("row")]
-custom_minimum_size = Vector2(30, 30)
+custom_minimum_size = Vector2(40, 40)
 offset_right = 30.0
 offset_bottom = 30.0
+theme_override_styles/normal = ExtResource("1_kqn4p")
+theme_override_styles/hover = ExtResource("2_bj5rc")
+theme_override_styles/focus = ExtResource("2_bj5rc")
 script = ExtResource("1_om2n6")
 scene = ExtResource("2_p4gdx")
 row = NodePath("Control/ScrollContainer/MarginContainer/board_Row")
@@ -15,9 +20,9 @@ row = NodePath("Control/ScrollContainer/MarginContainer/board_Row")
 clip_contents = true
 custom_minimum_size = Vector2(1885, 1090)
 anchors_preset = 0
-offset_left = 40.0
+offset_left = 50.0
 offset_top = -10.0
-offset_right = 1925.0
+offset_right = 1935.0
 offset_bottom = 1080.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Control"]

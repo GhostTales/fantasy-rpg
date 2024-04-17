@@ -1,11 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://cg57tcoeui0dy"]
+[gd_scene load_steps=10 format=3 uid="uid://cg57tcoeui0dy"]
 
 [ext_resource type="Script" path="res://scripts/board_task.cs" id="1_leqaj"]
 [ext_resource type="Script" path="res://scripts/remove_task_button.cs" id="2_2v1e7"]
+[ext_resource type="StyleBox" uid="uid://cddugynddpxmr" path="res://tres textures/button_normal.tres" id="2_f3r1v"]
 [ext_resource type="PackedScene" uid="uid://cwcnq8ay55scl" path="res://scenes/profile_button.tscn" id="2_n2xln"]
+[ext_resource type="StyleBox" uid="uid://cutwgwhu07g4d" path="res://tres textures/button_hover.tres" id="3_0e4ag"]
 [ext_resource type="Texture2D" uid="uid://b7e44aepvijfx" path="res://J30.png" id="3_vvvbc"]
 [ext_resource type="Texture2D" uid="uid://ktu28yt1r0e8" path="res://G30.png" id="4_sdbfy"]
 [ext_resource type="Texture2D" uid="uid://dp338045vkrwl" path="res://LJ30.png" id="5_lj2wo"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_skklb"]
 
 [node name="board_Task" type="Control"]
 custom_minimum_size = Vector2(225, 100)
@@ -27,7 +31,10 @@ offset_left = 3.0
 offset_top = 72.0
 offset_right = 86.0
 offset_bottom = 97.0
+focus_mode = 0
 theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_f3r1v")
+theme_override_styles/hover = ExtResource("3_0e4ag")
 text = "Remove task"
 script = ExtResource("2_2v1e7")
 
@@ -37,7 +44,9 @@ layout_direction = 2
 layout_mode = 0
 offset_right = 225.0
 offset_bottom = 68.0
+focus_mode = 1
 theme_override_font_sizes/font_size = 14
+theme_override_styles/focus = SubResource("StyleBoxEmpty_skklb")
 placeholder_text = "empty task"
 wrap_mode = 1
 

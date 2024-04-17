@@ -12,5 +12,6 @@ offset_bottom = -1040.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.5, 0.5)
+focus_mode = 1
 flat = true
 script = ExtResource("1_r3q3b")

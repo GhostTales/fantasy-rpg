@@ -27,6 +27,11 @@ public partial class task_adder : Panel
 	public void _on_button_pressed()
 	{
 		column.AddChild(scene.Instantiate());
-		GD.Print($"added {scene.Instantiate().Name} to {column.Name}({lineEdit.Text})");
+
+		if (lineEdit.Text != "")
+			GD.PrintRich($"added [b]{scene.Instantiate().Name}[/b] to [b][hint=name = {lineEdit.Text}]{column.Name}[/hint][/b]");
+		else
+			GD.PrintRich($"added [b]{scene.Instantiate().Name}[/b] to [b]{column.Name}[/b]");
+
 	}
 }

@@ -25,7 +25,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 theme_override_constants/margin_right = 5
 
-[node name="task_adder" type="Panel" parent="." node_paths=PackedStringArray("column")]
+[node name="task_adder" type="Panel" parent="." node_paths=PackedStringArray("column", "lineEdit")]
 custom_minimum_size = Vector2(225, 40)
 layout_direction = 2
 layout_mode = 2
@@ -35,6 +35,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_s2tob")
 script = ExtResource("1_hmbfa")
 scene = ExtResource("2_xgool")
 column = NodePath("ScrollContainer/MarginContainer/board_Column")
+lineEdit = NodePath("LineEdit")
 
 [node name="Button" type="Button" parent="task_adder"]
 custom_minimum_size = Vector2(25, 25)

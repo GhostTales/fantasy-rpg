@@ -20,6 +20,6 @@ public partial class column_adder : Button
 	public void _on_pressed()
 	{
 		row.AddChild(scene.Instantiate());
-		GD.Print($"added {scene.Instantiate().Name} to {row.Name}");
+		GD.PrintRich($"added [b]{scene.Instantiate().Name}[/b] to [b]{row.Name}[/b]");
 	}
 }

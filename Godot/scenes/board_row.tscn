@@ -12,6 +12,7 @@ offset_bottom = 30.0
 focus_mode = 0
 theme_override_styles/normal = ExtResource("1_kqn4p")
 theme_override_styles/hover = ExtResource("2_bj5rc")
+theme_override_styles/pressed = ExtResource("1_kqn4p")
 theme_override_styles/focus = ExtResource("1_kqn4p")
 script = ExtResource("1_om2n6")
 scene = ExtResource("2_p4gdx")

@@ -35,6 +35,7 @@ focus_mode = 0
 theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = ExtResource("2_f3r1v")
 theme_override_styles/hover = ExtResource("3_0e4ag")
+theme_override_styles/pressed = ExtResource("2_f3r1v")
 text = "Remove task"
 script = ExtResource("2_2v1e7")
 

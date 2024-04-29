@@ -8,7 +8,7 @@ import processing.video.*;
 Capture video;
 
 color trackColor; 
-float threshold = 10;
+float threshold = 15;
 
 void setup() {
   size(640, 480);
@@ -28,7 +28,7 @@ void draw() {
   image(video, 0, 0);
 
   //threshold = map(mouseX, 0, width, 0, 100);
-  threshold = 10;
+  threshold = 15;
 
   float avgX = 0;
   float avgY = 0;

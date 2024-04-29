@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dxrbrvxvd2k1a"]
+[gd_scene load_steps=3 format=3 uid="uid://dxrbrvxvd2k1a"]
 
 [ext_resource type="PackedScene" uid="uid://b5mtb3wahsgyl" path="res://scenes/board_row.tscn" id="1_afhiy"]
+[ext_resource type="PackedScene" uid="uid://b7wj7dcpwcv58" path="res://scenes/image_processor.tscn" id="2_yof33"]
 
 [node name="Main Board" type="Control"]
 layout_mode = 3
@@ -12,3 +13,5 @@ offset_left = 25.0
 offset_top = 25.0
 offset_right = 33.0
 offset_bottom = 33.0
+
+[node name="imageProcessor" parent="." instance=ExtResource("2_yof33")]

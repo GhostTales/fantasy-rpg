@@ -42,7 +42,7 @@ public partial class image_processor : Node
 			processor._frame = _frame;
 			processor.ProcessImage();
 
-			GD.Print($"{processor.avgX}, {processor.avgY}");
+			//GD.Print($"{processor.avgX}, {processor.avgY}");
 		}
 	}
 

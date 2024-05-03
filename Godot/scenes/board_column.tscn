@@ -1,32 +1,34 @@
-[gd_scene load_steps=7 format=3 uid="uid://b8amy42wauyrr"]
+[gd_scene load_steps=8 format=3 uid="uid://b8amy42wauyrr"]
 
 [ext_resource type="Script" path="res://scripts/task_adder.cs" id="1_hmbfa"]
 [ext_resource type="PackedScene" uid="uid://cg57tcoeui0dy" path="res://scenes/board_task.tscn" id="2_xgool"]
 [ext_resource type="StyleBox" uid="uid://cddugynddpxmr" path="res://tres textures/button_normal.tres" id="3_h6d6s"]
 [ext_resource type="StyleBox" uid="uid://cutwgwhu07g4d" path="res://tres textures/button_hover.tres" id="4_p6ki5"]
+[ext_resource type="Texture2D" uid="uid://h25uq1cqkkpy" path="res://textures/minusSign/MinusSign@3x.png" id="5_x28q4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s2tob"]
-bg_color = Color(0.180392, 0.180392, 0.180392, 1)
+bg_color = Color(0.545098, 0.45098, 0.611765, 1)
 border_width_left = 2
 border_width_top = 2
-border_width_right = 3
-border_width_bottom = 4
-border_color = Color(0.117647, 0.117647, 0.117647, 1)
-corner_radius_top_left = 7
-corner_radius_top_right = 7
-corner_radius_bottom_right = 7
-corner_radius_bottom_left = 7
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+border_blend = true
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gm3n4"]
 
 [node name="board_Column" type="MarginContainer"]
-custom_minimum_size = Vector2(230, 40)
-offset_right = 40.0
-offset_bottom = 40.0
+custom_minimum_size = Vector2(280, 75)
+offset_right = 280.0
+offset_bottom = 75.0
 theme_override_constants/margin_right = 5
 
 [node name="task_adder" type="Panel" parent="." node_paths=PackedStringArray("column", "lineEdit")]
-custom_minimum_size = Vector2(225, 40)
+custom_minimum_size = Vector2(275, 75)
 layout_direction = 2
 layout_mode = 2
 size_flags_horizontal = 0
@@ -38,45 +40,50 @@ column = NodePath("ScrollContainer/MarginContainer/board_Column")
 lineEdit = NodePath("LineEdit")
 
 [node name="Button" type="Button" parent="task_adder"]
-custom_minimum_size = Vector2(25, 25)
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
-offset_left = 192.0
-offset_top = 6.0
-offset_right = 217.0
-offset_bottom = 31.0
+offset_left = 217.0
+offset_top = 13.0
+offset_right = 267.0
+offset_bottom = 63.0
 focus_mode = 0
 theme_override_styles/normal = ExtResource("3_h6d6s")
 theme_override_styles/hover = ExtResource("4_p6ki5")
 theme_override_styles/pressed = ExtResource("3_h6d6s")
 theme_override_styles/focus = ExtResource("3_h6d6s")
+icon = ExtResource("5_x28q4")
+icon_alignment = 1
 
 [node name="LineEdit" type="LineEdit" parent="task_adder"]
 layout_mode = 0
-offset_left = 2.0
+offset_left = 3.0
 offset_top = 2.0
-offset_right = 187.0
-offset_bottom = 36.0
-theme_override_font_sizes/font_size = 14
+offset_right = 216.0
+offset_bottom = 72.0
+theme_override_font_sizes/font_size = 28
 theme_override_styles/focus = SubResource("StyleBoxEmpty_gm3n4")
-placeholder_text = "new column"
+placeholder_text = "New column"
 flat = true
 
 [node name="ScrollContainer" type="ScrollContainer" parent="task_adder"]
-custom_minimum_size = Vector2(200, 1050)
+custom_minimum_size = Vector2(275, 600)
 layout_mode = 0
 offset_left = -5.0
-offset_top = 45.0
-offset_right = 230.0
-offset_bottom = 1095.0
+offset_top = 80.0
+offset_right = 270.0
+offset_bottom = 680.0
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="task_adder/ScrollContainer"]
+custom_minimum_size = Vector2(275, 155)
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 
 [node name="board_Column" type="VBoxContainer" parent="task_adder/ScrollContainer/MarginContainer"]
-custom_minimum_size = Vector2(225, 100)
+custom_minimum_size = Vector2(275, 155)
 layout_mode = 2
 
 [connection signal="pressed" from="task_adder/Button" to="task_adder" method="_on_button_pressed"]

@@ -14,7 +14,7 @@ void setup() {
   size(640, 480);
   String[] cameras = Capture.list();
   printArray(cameras);
-  video = new Capture(this, "pipeline:autovideosrc");
+  video = new Capture(this, cameras[1]);
   video.start();
   trackColor = color(25, 200, 120);
 }

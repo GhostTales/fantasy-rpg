@@ -46,7 +46,7 @@ namespace ProcessImage
 
                     float d = DistSq(r1, g1, b1, r2, g2, b2);
 
-                    Debug.WriteLine($"x,y = {x},{y}");
+                    //Debug.WriteLine($"x,y = {x},{y}");
 
                     if (d < threshold * threshold)
                     {

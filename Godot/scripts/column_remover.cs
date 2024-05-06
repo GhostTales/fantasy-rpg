@@ -1,12 +1,14 @@
 using Godot;
 using System;
 
-public partial class task_adder : Panel
+public partial class column_remover : Panel
 {
-	[Export]
-	PackedScene scene;
+	// Called when the node enters the scene tree for the first time.
+
 	[Export]
 	Node column;
+	[Export]
+	Node remove;
 	[Export]
 	LineEdit lineEdit;
 	public override void _Ready()
@@ -20,12 +22,11 @@ public partial class task_adder : Panel
 
 	public void _on_button_pressed()
 	{
-		column.AddChild(scene.Instantiate());
-
 		if (lineEdit.Text != "")
-			GD.PrintRich($"added [b]{scene.Instantiate().Name}[/b] to [b][hint=name = {lineEdit.Text}]{column.Name}[/hint][/b]");
+			GD.PrintRich($"removed [b][hint=name = {lineEdit.Text}]{column.Name}[/hint][/b]");
 		else
-			GD.PrintRich($"added [b]{scene.Instantiate().Name}[/b] to [b]{column.Name}[/b]");
+			GD.PrintRich($"removed [b]{column.Name}[/b]");
 
+		remove.QueueFree();
 	}
 }

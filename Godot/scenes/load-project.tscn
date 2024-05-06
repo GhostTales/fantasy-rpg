@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://5jdnylkfeu71"]
+
+[ext_resource type="Script" path="res://scripts/loadproject.cs" id="1_8bwhb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m3mpu"]
+bg_color = Color(0.54902, 0.470588, 0.627451, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ct6ga"]
+bg_color = Color(0.54902, 0.470588, 0.627451, 1)
+border_color = Color(0.352941, 0.117647, 0.431373, 1)
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_right = 146.0
+offset_bottom = 35.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_m3mpu")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ct6ga")
+text = "load project"
+script = ExtResource("1_8bwhb")

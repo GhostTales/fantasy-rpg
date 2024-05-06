@@ -5,6 +5,10 @@ using ProcessImage;
 using System.Drawing;
 public partial class image_processor : Node
 {
+
+	[Export]
+	CharacterBody2D cursor;
+
 	VideoCapture _capture;
 	private Mat _frame;
 
@@ -42,8 +46,19 @@ public partial class image_processor : Node
 			processor._frame = _frame;
 			processor.ProcessImage();
 
-			//GD.Print($"{processor.avgX}, {processor.avgY}");
+			//cursor.Position = map(processor.avgX, processor.avgY, 1600, 900);
+			//GD.Print(cursor.Position);
+
+			GD.Print($"{processor.avgX}, {processor.avgY}");
 		}
+	}
+
+	private Vector2 map(int X, int Y, int W, int H)
+	{
+		float newX = X / _capture.Width * W;
+		float newY = Y / _capture.Height * H;
+
+		return new Vector2(newX, newY);
 	}
 
 

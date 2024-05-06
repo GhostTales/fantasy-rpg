@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://dp338045vkrwl" path="res://LJ30.png" id="5_lj2wo"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n5bb5"]
-bg_color = Color(0.545098, 0.45098, 0.611765, 1)
+bg_color = Color(0.54902, 0.470588, 0.627451, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2

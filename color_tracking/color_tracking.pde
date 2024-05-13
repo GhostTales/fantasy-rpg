@@ -3,6 +3,9 @@
 // http://patreon.com/codingtrain
 // Code for: https://youtu.be/nCVZHROb_dE
 
+import websockets.*;
+WebsocketServer ws;
+
 import processing.video.*;
 
 Capture video;
@@ -14,9 +17,11 @@ void setup() {
   size(640, 480);
   String[] cameras = Capture.list();
   printArray(cameras);
-  video = new Capture(this, cameras[1]);
+  video = new Capture(this, "pipeline:autovideosrc"); //"pipeline:autovideosrc"
   video.start();
   trackColor = color(25, 200, 120);
+  
+  thread("Websocket");
 }
 
 void captureEvent(Capture video) {
@@ -71,6 +76,9 @@ void draw() {
     strokeWeight(4.0);
     stroke(0);
     ellipse(avgX, avgY, 24, 24);
+    if (avgX >= 0.0f || avgY >= 0.0f) {
+      ws.sendMessage(Float.toString(avgX)+","+Float.toString(avgY));
+    }
   }
 }
 
@@ -84,4 +92,21 @@ void mousePressed() {
   int loc = mouseX + mouseY*video.width;
   trackColor = video.pixels[loc];
   println(red(trackColor) + ", " + green(trackColor) + ", " + blue(trackColor));
+}
+
+void Websocket() {
+  WebsocketServer.enableDebug();
+  ws = new WebsocketServer(this,8080,"/colorTracking");
+}
+
+void webSocketServerEvent(String msg){
+ println(msg);
+}
+
+public void webSocketConnectEvent(String uid, String ip) {
+  println("Someone connected", uid, ip);
+}
+  
+public void webSocketDisconnectEvent(String uid, String ip) {
+  println("Someone disconnected", uid, ip);
 }

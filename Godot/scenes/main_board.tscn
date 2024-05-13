@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://dxrbrvxvd2k1a"]
 
 [ext_resource type="PackedScene" uid="uid://b5mtb3wahsgyl" path="res://scenes/board_row.tscn" id="1_afhiy"]
-[ext_resource type="PackedScene" uid="uid://b7wj7dcpwcv58" path="res://scenes/image_processor.tscn" id="2_yof33"]
 [ext_resource type="PackedScene" uid="uid://duyq3mbefq2um" path="res://scenes/cursor.tscn" id="3_0b6gm"]
+[ext_resource type="Script" path="res://scripts/WebSocketClient.cs" id="5_xrvwo"]
 
 [node name="Main Board" type="Control"]
 custom_minimum_size = Vector2(1600, 900)
@@ -16,7 +16,8 @@ offset_top = 25.0
 offset_right = 33.0
 offset_bottom = 33.0
 
-[node name="imageProcessor" parent="." node_paths=PackedStringArray("cursor") instance=ExtResource("2_yof33")]
-cursor = NodePath("Cursor")
+[node name="WebSocketClient" type="Node" parent="."]
+script = ExtResource("5_xrvwo")
+url = "localhost:8080/colorTracking"
 
-[node name="Cursor" parent="imageProcessor" instance=ExtResource("3_0b6gm")]
+[node name="Cursor" parent="WebSocketClient" instance=ExtResource("3_0b6gm")]

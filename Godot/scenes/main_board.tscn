@@ -16,7 +16,6 @@ offset_top = 25.0
 offset_right = 33.0
 offset_bottom = 33.0
 
-[node name="imageProcessor" parent="." node_paths=PackedStringArray("cursor") instance=ExtResource("2_yof33")]
-cursor = NodePath("Cursor")
+[node name="imageProcessor" parent="." instance=ExtResource("2_yof33")]
 
 [node name="Cursor" parent="imageProcessor" instance=ExtResource("3_0b6gm")]

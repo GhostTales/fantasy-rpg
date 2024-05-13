@@ -13,3 +13,5 @@ export_presets.cfg
 .mono/
 data_*/
 mono_crash.*.json
+Godot/CamImage.Jpeg
+Godot/CamImage.Jpeg.import

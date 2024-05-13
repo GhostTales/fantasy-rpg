@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://sshihd7hsi2d"]
+
+[ext_resource type="Script" path="res://scripts/saveproject.cs" id="1_20d0q"]
+
+[sub_resource type="Theme" id="Theme_pbq1w"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k64o2"]
+bg_color = Color(0.54902, 0.470588, 0.627451, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y1d2g"]
+bg_color = Color(0.54902, 0.470588, 0.627451, 1)
+border_color = Color(0.352941, 0.117647, 0.431373, 1)
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_right = 132.0
+offset_bottom = 41.0
+theme = SubResource("Theme_pbq1w")
+theme_override_styles/normal = SubResource("StyleBoxFlat_k64o2")
+theme_override_styles/hover = SubResource("StyleBoxFlat_y1d2g")
+text = "save project"
+script = ExtResource("1_20d0q")

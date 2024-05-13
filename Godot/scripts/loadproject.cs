@@ -1,3 +1,8 @@
+using Godot;
+using System;
+
+public partial class LoadButton2 : Button
+{
 // Note: This can be called from anywhere inside the tree. This function is
 // path independent.
 public void LoadGame()
@@ -54,3 +59,10 @@ public void LoadGame()
 		}
 	}
 }
+
+private void _on_pressed()
+{
+	LoadGame();	// Replace with function body.
+}
+}
+

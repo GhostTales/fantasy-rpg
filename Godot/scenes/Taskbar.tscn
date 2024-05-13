@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://b456r1r264grs"]
+
+[ext_resource type="PackedScene" uid="uid://5jdnylkfeu71" path="res://scenes/load-project.tscn" id="1_pa00j"]
+[ext_resource type="PackedScene" uid="uid://sshihd7hsi2d" path="res://scenes/save-project.tscn" id="2_06yn6"]
+
+[node name="Taskbar" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="load" parent="." instance=ExtResource("1_pa00j")]
+layout_mode = 1
+offset_left = 139.0
+offset_right = -1330.0
+offset_bottom = -860.0
+
+[node name="save" parent="." instance=ExtResource("2_06yn6")]
+layout_mode = 1
+offset_left = -1.0
+offset_right = -1468.0
+offset_bottom = -858.0

@@ -1,3 +1,8 @@
+using Godot;
+using System;
+
+public partial class SaveButton2 : Button
+{
 // Note: This can be called from anywhere inside the tree. This function is
 // path independent.
 // Go through everything in the persist category and ask them to return a
@@ -33,3 +38,15 @@ public void SaveGame()
 		saveGame.StoreLine(jsonString);
 	}
 }
+	
+
+
+
+private void _on_pressed()
+{
+	SaveGame();	// Replace with function body.
+}
+}
+
+
+

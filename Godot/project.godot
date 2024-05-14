@@ -13,7 +13,6 @@ config_version=5
 config/name="trello board"
 run/main_scene="res://scenes/main_board.tscn"
 config/features=PackedStringArray("4.1", "C#", "GL Compatibility")
-run/max_fps=120
 config/icon="res://icon.svg"
 
 [display]
@@ -22,6 +21,7 @@ window/size/viewport_width=1600
 window/size/viewport_height=900
 window/size/initial_position=Vector2i(0, -50)
 window/stretch/mode="canvas_items"
+window/vsync/vsync_mode=0
 
 [dotnet]
 

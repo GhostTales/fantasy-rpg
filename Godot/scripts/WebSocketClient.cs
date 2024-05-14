@@ -1,6 +1,5 @@
 using Godot;
 using System;
-using System.Net.WebSockets;
 using System.Threading.Tasks;
 
 public partial class WebSocketClient : Node
@@ -20,27 +19,16 @@ public partial class WebSocketClient : Node
     public override void _Process(double delta)
     {
         PollWebSocket();
-
-        //if (WebSocketClosed)
-        //SetProcess(false);
-
+        if (WebSocketClosed)
+            SetProcess(false);
     }
 
-    public void Connect()
+    public async void Connect()
     {
         Client = new WebSocketPeer();
         Client.ConnectToUrl(url);
 
-    }
-
-    public async void SendText(string text)
-    {
-        await Task.Run(async () =>
-        {
-            Client.SendText(text);
-
-            await Task.Delay(0);
-        });
+        await Task.Delay(0);
     }
 
     public async void PollWebSocket()
@@ -52,12 +40,10 @@ public partial class WebSocketClient : Node
             var state = Client.GetReadyState();
             if (WebSocketPeer.State.Open == state)
             {
-                SendText("packet request");
-                while (Client.GetAvailablePacketCount() >= 1)
+                while (Client.GetAvailablePacketCount() == 1)
                 {
-                    packet = Client.GetPacket().GetStringFromUtf8();
+                    packet = System.Text.Encoding.UTF8.GetString(Client.GetPacket());
                     GD.Print($"packet: {packet}");
-
                 }
             }
             else if (state == WebSocketPeer.State.Closing) { return; }
@@ -67,11 +53,12 @@ public partial class WebSocketClient : Node
                 var reason = Client.GetCloseReason();
 
                 GD.Print($"Websocket WebSocketClosed with code: {code}, reason: {reason}");
-                Connect();
                 WebSocketClosed = true;
             }
-            await Task.Delay(100);
+            await Task.Delay(500);
         });
+
+        await Task.Delay(0);
     }
 
 }

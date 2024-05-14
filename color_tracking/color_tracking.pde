@@ -13,16 +13,14 @@ Capture video;
 color trackColor; 
 float threshold = 15;
 
-String packet;
-
 void setup() {
-  size(640, 360);
+  size(640, 480);
   String[] cameras = Capture.list();
   printArray(cameras);
-  video = new Capture(this, cameras[1]); //"pipeline:autovideosrc"
+  video = new Capture(this, "pipeline:autovideosrc"); //"pipeline:autovideosrc"
   video.start();
   trackColor = color(25, 200, 120);
-
+  
   thread("Websocket");
 }
 
@@ -44,8 +42,8 @@ void draw() {
 
   // Begin loop to walk through every pixel
   for (int x = 0; x < video.width; x++ ) {
-    for (int y = 0; y < video.height - 120; y++ ) {
-      int loc = x + y * (video.width);
+    for (int y = 0; y < video.height; y++ ) {
+      int loc = x + y * video.width;
       // What is current color
       color currentColor = video.pixels[loc];
       float r1 = red(currentColor);
@@ -79,9 +77,7 @@ void draw() {
     stroke(0);
     ellipse(avgX, avgY, 24, 24);
     if (avgX >= 0.0f || avgY >= 0.0f) {
-      //ws.sendMessage(Float.toString(avgX)+","+Float.toString(avgY));
-      packet = Float.toString(avgX)+","+Float.toString(avgY);
-      //delay(25);
+      ws.sendMessage(Float.toString(avgX)+","+Float.toString(avgY));
     }
   }
 }
@@ -100,20 +96,17 @@ void mousePressed() {
 
 void Websocket() {
   WebsocketServer.enableDebug();
-  ws = new WebsocketServer(this, 8080, "/colorTracking");
+  ws = new WebsocketServer(this,8080,"/colorTracking");
 }
 
-void webSocketServerEvent(String msg) {
-  println(msg + " => " + packet);
-  if (packet != null) {
-    ws.sendMessage(packet);
-  }
+void webSocketServerEvent(String msg){
+ println(msg);
 }
 
 public void webSocketConnectEvent(String uid, String ip) {
   println("Someone connected", uid, ip);
 }
-
+  
 public void webSocketDisconnectEvent(String uid, String ip) {
   println("Someone disconnected", uid, ip);
 }

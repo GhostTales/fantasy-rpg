@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dxrbrvxvd2k1a"]
+[gd_scene load_steps=5 format=3 uid="uid://dxrbrvxvd2k1a"]
 
 [ext_resource type="PackedScene" uid="uid://b5mtb3wahsgyl" path="res://scenes/board_row.tscn" id="1_afhiy"]
 [ext_resource type="PackedScene" uid="uid://duyq3mbefq2um" path="res://scenes/cursor.tscn" id="3_0b6gm"]
+[ext_resource type="PackedScene" uid="uid://b456r1r264grs" path="res://scenes/Taskbar.tscn" id="4_stkxk"]
 [ext_resource type="Script" path="res://scripts/WebSocketClient.cs" id="5_xrvwo"]
 
 [node name="Main Board" type="Control"]
@@ -9,12 +10,15 @@ custom_minimum_size = Vector2(1600, 900)
 layout_mode = 3
 anchors_preset = 0
 
+[node name="Taskbar" parent="." instance=ExtResource("4_stkxk")]
+layout_mode = 1
+
 [node name="board_Row" parent="." instance=ExtResource("1_afhiy")]
 layout_mode = 0
 offset_left = 25.0
-offset_top = 25.0
-offset_right = 33.0
-offset_bottom = 33.0
+offset_top = 50.0
+offset_right = 100.0
+offset_bottom = 125.0
 
 [node name="WebSocketClient" type="Node" parent="."]
 script = ExtResource("5_xrvwo")

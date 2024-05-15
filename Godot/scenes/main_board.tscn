@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://dxrbrvxvd2k1a"]
+[gd_scene load_steps=6 format=3 uid="uid://dxrbrvxvd2k1a"]
 
 [ext_resource type="PackedScene" uid="uid://b5mtb3wahsgyl" path="res://scenes/board_row.tscn" id="1_afhiy"]
 [ext_resource type="PackedScene" uid="uid://duyq3mbefq2um" path="res://scenes/cursor.tscn" id="3_0b6gm"]
 [ext_resource type="Script" path="res://scripts/cursor.cs" id="4_lvubd"]
 [ext_resource type="Script" path="res://scripts/WebSocketClient.cs" id="5_xrvwo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6ru7c"]
+size = Vector2(80, 80)
 
 [node name="Main Board" type="Control"]
 custom_minimum_size = Vector2(1600, 900)
@@ -17,6 +20,15 @@ offset_top = 25.0
 offset_right = 33.0
 offset_bottom = 33.0
 
+[node name="Area2D" type="Area2D" parent="board_Row"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="board_Row/Area2D"]
+position = Vector2(37, 37)
+shape = SubResource("RectangleShape2D_6ru7c")
+
+[node name="Timer" type="Timer" parent="board_Row"]
+wait_time = 2.0
+
 [node name="WebSocketClient" type="Node" parent="."]
 script = ExtResource("5_xrvwo")
 url = "localhost:8080/colorTracking"
@@ -25,3 +37,7 @@ url = "localhost:8080/colorTracking"
 script = ExtResource("4_lvubd")
 Client = NodePath("..")
 speed = 50.0
+
+[connection signal="area_entered" from="board_Row/Area2D" to="board_Row/Area2D" method="_on_area_entered"]
+[connection signal="area_exited" from="board_Row/Area2D" to="board_Row/Area2D" method="_on_area_exited"]
+[connection signal="timeout" from="board_Row/Timer" to="board_Row" method="_on_timer_timeout"]

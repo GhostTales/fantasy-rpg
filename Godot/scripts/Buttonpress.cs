@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class column_adder : Button
+public partial class Buttonpress : Area2D
 {
 	private Timer delayTimer;
 	
@@ -26,22 +26,18 @@ public partial class column_adder : Button
 			row.AddChild(scene.Instantiate());
 		GD.PrintRich($"added [b]{scene.Instantiate().Name}[/b] to [b]{row.Name}[/b]");
 			}
-	public void _on_pressed()
-	{
-		row.AddChild(scene.Instantiate());
-		GD.PrintRich($"added [b]{scene.Instantiate().Name}[/b] to [b]{row.Name}[/b]");
-	}
-
-	private void _on_area_2d_area_entered(Area2D area)
- {
+	
+	private void _on_area_entered(Area2D area)
+{
 	// Replace with function body.
 	GD.Print("Mouse entered the button area...");
 	delayTimer.Start();
 }
 
-private void _on_area_2d_area_exited(Area2D area)
+private void _on_area_exited(Area2D area)
 {
 	GD.Print("Mouse exit on button area.."); // Replace with function body.
 	delayTimer.Stop();
 }
 }
+

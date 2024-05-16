@@ -5,20 +5,20 @@
 
 [node name="Taskbar" type="Control"]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
+offset_right = 1.0
+offset_bottom = 1.0
 
 [node name="load" parent="." instance=ExtResource("1_pa00j")]
 layout_mode = 1
-offset_left = 139.0
-offset_right = -1330.0
-offset_bottom = -860.0
+offset_left = 140.0
+offset_top = 2.0
+offset_right = 139.0
+offset_bottom = 1.0
 
 [node name="save" parent="." instance=ExtResource("2_06yn6")]
 layout_mode = 1
-offset_left = -1.0
-offset_right = -1468.0
-offset_bottom = -858.0
+offset_left = 5.0
+offset_top = 2.0
+offset_right = 4.0
+offset_bottom = 1.0

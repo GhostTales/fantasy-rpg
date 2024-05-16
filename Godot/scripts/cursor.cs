@@ -22,7 +22,7 @@ public partial class cursor : CharacterBody2D
 
 			}
 			else GD.Print("Packet length is 0");
-		else 
+		//else 
 			//GD.Print("Packet is null");
 
 		Position = Position.MoveToward(coords, (1 + (float)delta) * speed);

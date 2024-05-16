@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Net.WebSockets;
+using System.Threading;
 using System.Threading.Tasks;
 
 public partial class WebSocketClient : Node
@@ -11,15 +12,19 @@ public partial class WebSocketClient : Node
     public string packet { get; set; }
 
     bool WebSocketClosed = false;
+    Thread myThread;
 
     public override void _Ready()
     {
         Connect();
+
     }
 
     public override void _Process(double delta)
     {
-        PollWebSocket();
+        myThread = new Thread(new ThreadStart(PollWebSocket));
+        myThread.Start();
+        //PollWebSocket();
 
         //if (WebSocketClosed)
         //SetProcess(false);
@@ -35,43 +40,40 @@ public partial class WebSocketClient : Node
 
     public async void SendText(string text)
     {
-        await Task.Run(async () =>
-        {
-            Client.SendText(text);
 
-            await Task.Delay(0);
-        });
+        Client.SendText(text);
+
+        await Task.Delay(0);
+
     }
 
-    public async void PollWebSocket()
+    public void PollWebSocket()
     {
-        await Task.Run(async () =>
+
+        WebSocketClosed = false;
+        Client.Poll();
+        var state = Client.GetReadyState();
+        if (WebSocketPeer.State.Open == state)
         {
-            WebSocketClosed = false;
-            Client.Poll();
-            var state = Client.GetReadyState();
-            if (WebSocketPeer.State.Open == state)
+            SendText("packet request");
+            while (Client.GetAvailablePacketCount() >= 1)
             {
-                SendText("packet request");
-                while (Client.GetAvailablePacketCount() >= 1)
-                {
-                    packet = Client.GetPacket().GetStringFromUtf8();
-                    GD.Print($"packet: {packet}");
+                packet = Client.GetPacket().GetStringFromUtf8();
+                //GD.Print($"packet: {packet}");
 
-                }
             }
-            else if (state == WebSocketPeer.State.Closing) { return; }
-            else if (state == WebSocketPeer.State.Closed)
-            {
-                var code = Client.GetCloseCode();
-                var reason = Client.GetCloseReason();
+        }
+        else if (state == WebSocketPeer.State.Closing) { return; }
+        else if (state == WebSocketPeer.State.Closed)
+        {
+            var code = Client.GetCloseCode();
+            var reason = Client.GetCloseReason();
 
-                GD.Print($"Websocket WebSocketClosed with code: {code}, reason: {reason}");
-                Connect();
-                WebSocketClosed = true;
-            }
-            await Task.Delay(100);
-        });
+            GD.Print($"Websocket WebSocketClosed with code: {code}, reason: {reason}");
+            Connect();
+            WebSocketClosed = true;
+        }
+        Thread.Sleep(100);
     }
 
 }

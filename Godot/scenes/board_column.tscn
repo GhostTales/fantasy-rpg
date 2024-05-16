@@ -76,7 +76,6 @@ icon = ExtResource("8_0y6qb")
 icon_alignment = 1
 
 [node name="Timer" type="Timer" parent="task_adder"]
-wait_time = 2.0
 
 [node name="Area2D" type="Area2D" parent="task_adder"]
 
@@ -149,7 +148,6 @@ position = Vector2(242.5, 37.75)
 shape = SubResource("RectangleShape2D_deanc")
 
 [node name="Timer" type="Timer" parent="Coloum"]
-wait_time = 2.0
 
 [connection signal="pressed" from="task_adder/Button" to="task_adder" method="_on_button_pressed"]
 [connection signal="timeout" from="task_adder/Timer" to="task_adder" method="_on_timer_timeout"]

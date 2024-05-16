@@ -30,9 +30,8 @@ public partial class column_adder : Button
 		row.AddChild(scene.Instantiate());
 		GD.PrintRich($"added [b]{scene.Instantiate().Name}[/b] to [b]{row.Name}[/b]");
 	}
-
-	private void _on_area_2d_body_entered(Area2D area)
- {
+private void _on_area_2d_body_entered(Area2D area)
+{
 	delayTimer.Start();
 }
 
@@ -40,4 +39,5 @@ private void _on_area_2d_body_exited(Area2D area)
 {
 	delayTimer.Stop();
 }
+
 }

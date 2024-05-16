@@ -40,4 +40,5 @@ speed = 50.0
 
 [connection signal="area_entered" from="board_Row/Area2D" to="board_Row/Area2D" method="_on_area_entered"]
 [connection signal="area_exited" from="board_Row/Area2D" to="board_Row/Area2D" method="_on_area_exited"]
+[connection signal="body_entered" from="board_Row/Area2D" to="board_Row" method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="board_Row/Timer" to="board_Row" method="_on_timer_timeout"]

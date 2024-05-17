@@ -11,7 +11,7 @@ public partial class WebSocketClient : Node
     WebSocketPeer Client;
     public string packet { get; set; }
 
-    bool WebSocketClosed = false;
+    public bool WebSocketClosed = false;
     Thread myThread;
 
     public override void _Ready()
@@ -40,8 +40,13 @@ public partial class WebSocketClient : Node
 
     public async void SendText(string text)
     {
-
-        Client.SendText(text);
+        try
+        {
+            Client.SendText(text);
+        }
+        catch (System.Exception)
+        {
+        }
 
         await Task.Delay(0);
 
@@ -73,7 +78,7 @@ public partial class WebSocketClient : Node
             Connect();
             WebSocketClosed = true;
         }
-        Thread.Sleep(100);
+        Thread.Sleep(10);
     }
 
 }

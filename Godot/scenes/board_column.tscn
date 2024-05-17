@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b8amy42wauyrr"]
+[gd_scene load_steps=13 format=3 uid="uid://b8amy42wauyrr"]
 
 [ext_resource type="Script" path="res://scripts/column_remover.cs" id="1_2omok"]
 [ext_resource type="Script" path="res://scripts/task_adder.cs" id="1_hmbfa"]
@@ -11,9 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://c556pp0u3upth" path="res://textures/PlusSign/PlusSign@3x.png" id="8_0y6qb"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cowi2"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_uprhv"]
-size = Vector2(43, 43)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s2tob"]
 bg_color = Color(0.54902, 0.470588, 0.627451, 1)
@@ -29,9 +26,6 @@ corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gm3n4"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_deanc"]
-size = Vector2(57, 56.5)
 
 [node name="board_Column" type="MarginContainer"]
 custom_minimum_size = Vector2(280, 125)
@@ -74,15 +68,6 @@ theme_override_styles/disabled = ExtResource("6_jf7be")
 theme_override_styles/focus = ExtResource("7_h2nmx")
 icon = ExtResource("8_0y6qb")
 icon_alignment = 1
-
-[node name="Timer" type="Timer" parent="task_adder"]
-wait_time = 2.0
-
-[node name="Area2D" type="Area2D" parent="task_adder"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="task_adder/Area2D"]
-position = Vector2(21.5, 102.5)
-shape = SubResource("RectangleShape2D_uprhv")
 
 [node name="Coloum" type="Panel" parent="." node_paths=PackedStringArray("column", "remove", "lineEdit")]
 custom_minimum_size = Vector2(275, 75)
@@ -142,20 +127,5 @@ theme_override_constants/margin_right = 5
 custom_minimum_size = Vector2(275, 155)
 layout_mode = 2
 
-[node name="Area2D" type="Area2D" parent="Coloum"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Coloum/Area2D"]
-position = Vector2(242.5, 37.75)
-shape = SubResource("RectangleShape2D_deanc")
-
-[node name="Timer" type="Timer" parent="Coloum"]
-wait_time = 2.0
-
 [connection signal="pressed" from="task_adder/Button" to="task_adder" method="_on_button_pressed"]
-[connection signal="timeout" from="task_adder/Timer" to="task_adder" method="_on_timer_timeout"]
-[connection signal="body_entered" from="task_adder/Area2D" to="task_adder" method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="task_adder/Area2D" to="task_adder" method="_on_area_2d_body_exited"]
 [connection signal="pressed" from="Coloum/Button" to="Coloum" method="_on_button_pressed"]
-[connection signal="body_entered" from="Coloum/Area2D" to="Coloum" method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="Coloum/Area2D" to="Coloum" method="_on_area_2d_body_exited"]
-[connection signal="timeout" from="Coloum/Timer" to="Coloum" method="_on_timer_timeout"]

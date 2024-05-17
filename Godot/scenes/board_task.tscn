@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cg57tcoeui0dy"]
+[gd_scene load_steps=13 format=3 uid="uid://cg57tcoeui0dy"]
 
 [ext_resource type="Script" path="res://scripts/board_task.cs" id="1_leqaj"]
 [ext_resource type="Script" path="res://scripts/remove_task_button.cs" id="2_2v1e7"]
@@ -22,9 +22,6 @@ corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fbvuu"]
-size = Vector2(40, 39)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j40ak"]
 draw_center = false
@@ -71,15 +68,6 @@ icon = ExtResource("4_cyyq5")
 icon_alignment = 1
 script = ExtResource("2_2v1e7")
 
-[node name="Area2D" type="Area2D" parent="remove_task_button"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="remove_task_button/Area2D"]
-position = Vector2(18, 17.5)
-shape = SubResource("RectangleShape2D_fbvuu")
-
-[node name="Timer" type="Timer" parent="remove_task_button"]
-wait_time = 2.0
-
 [node name="taskname" type="TextEdit" parent="."]
 custom_minimum_size = Vector2(265, 50)
 layout_direction = 2
@@ -125,6 +113,3 @@ layout_mode = 2
 icon = ExtResource("5_lj2wo")
 
 [connection signal="pressed" from="remove_task_button" to="remove_task_button" method="_on_pressed"]
-[connection signal="body_entered" from="remove_task_button/Area2D" to="remove_task_button" method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="remove_task_button/Area2D" to="remove_task_button" method="_on_area_2d_body_exited"]
-[connection signal="timeout" from="remove_task_button/Timer" to="remove_task_button" method="_on_timer_timeout"]

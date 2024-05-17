@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://db3774hit1vxm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jrca3"]
+bg_color = Color(0, 0, 0, 1)
+draw_center = false
+border_width_left = 100
+border_width_top = 100
+border_width_right = 100
+border_width_bottom = 100
+border_color = Color(1, 0, 0, 1)
+
+[node name="calibration screen" type="Control"]
+custom_minimum_size = Vector2(1600, 900)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1600.0
+offset_bottom = 900.0
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(1600, 900)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_jrca3")

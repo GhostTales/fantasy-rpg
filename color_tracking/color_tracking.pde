@@ -8,15 +8,21 @@ color trackColor;
 float threshold = 15;
 
 String packet;
+boolean calibrating;
+
+int[][] corners = {{50, 50}, {590, 50}, {50, 310}, {590, 310}};
+int corner;
 
 
 void setup() {
   size(640, 360);
   String[] cameras = Capture.list();
   printArray(cameras);
-  video = new Capture(this, cameras[1]); //"pipeline:autovideosrc"
+  video = new Capture(this, cameras[cameras.length-1]); //"pipeline:autovideosrc"
   video.start();
   trackColor = color(25, 200, 120);
+
+
 
   thread("Websocket");
 }
@@ -28,6 +34,10 @@ void captureEvent(Capture video) {
 void draw() {
   video.loadPixels();
   image(video, 0, 0);
+
+  fill(0, 200, 0);
+
+  calibration();
 
   //threshold = map(mouseX, 0, width, 0, 100);
   threshold = 15;
@@ -73,25 +83,28 @@ void draw() {
     strokeWeight(4.0);
     stroke(0);
     ellipse(avgX, avgY, 24, 24);
+
     if (avgX >= 0.0f || avgY >= 0.0f) {
       //ws.sendMessage(Float.toString(avgX)+","+Float.toString(avgY));
-      packet = Float.toString(avgX)+","+Float.toString(avgY);
+      String list = corners[0][0]+","+corners[0][1]+","+corners[1][0]+","+(corners[1][1])+","+(corners[2][0])+","+corners[2][1]+","+(corners[3][0])+","+ (corners[3][1]) ;
+      packet = Float.toString(avgX)+","+Float.toString(avgY) + "," + list;
       //delay(25);
     }
   }
 }
 
-float distSq(float x1, float y1, float z1, float x2, float y2, float z2) {
+public float distSq(float x1, float y1, float z1, float x2, float y2, float z2) {
   float d = (x2-x1)*(x2-x1) + (y2-y1)*(y2-y1) +(z2-z1)*(z2-z1);
   return d;
 }
 
-
 void mousePressed() {
-  // Save color where the mouse is clicked in trackColor variable
-  int loc = mouseX + mouseY*video.width;
-  trackColor = video.pixels[loc];
-  println(red(trackColor) + ", " + green(trackColor) + ", " + blue(trackColor));
+  if (calibrating != true) {
+    // Save color where the mouse is clicked in trackColor variable
+    int loc = mouseX + mouseY*video.width;
+    trackColor = video.pixels[loc];
+    println(red(trackColor) + ", " + green(trackColor) + ", " + blue(trackColor));
+  }
 }
 
 void Websocket() {
@@ -112,4 +125,38 @@ public void webSocketConnectEvent(String uid, String ip) {
 
 public void webSocketDisconnectEvent(String uid, String ip) {
   println("Someone disconnected", uid, ip);
+}
+
+
+
+
+
+public void calibration() {
+  for (int i = 0; i < 4; i++) {
+    circle(corners[i][0], corners[i][1], 10);
+
+    if (dist(mouseX, mouseY, corners[i][0], corners[i][1]) <= 10) 
+    {
+      println("over cirvle: "+ i);
+      corner = i;
+      calibrating = true;
+      if (mousePressed) {
+        corners[i][0] = mouseX;
+        corners[i][1] = mouseY;
+        trackColor = color(25, 200, 120);
+      }
+    } else {
+      calibrating = false;
+    }
+  }
+}
+
+public boolean overCircle(int x, int y, int diameter) {
+  float disX = x - mouseX;
+  float disY = y - mouseY;
+  if (sqrt(sq(disX) + sq(disY)) < diameter/2 ) {
+    return true;
+  } else {
+    return false;
+  }
 }

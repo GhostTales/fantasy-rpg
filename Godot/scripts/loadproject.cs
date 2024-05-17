@@ -1,44 +1,68 @@
 using Godot;
 using System;
-using System.IO;
 
-public partial class loadproject : Button
+public partial class LoadButton2 : Button
 {
-	private string loadFilePath;
-	private TextureRect textureRect;
-
-	public override void _Ready()
+// Note: This can be called from anywhere inside the tree. This function is
+// path independent.
+public void LoadGame()
+{
+	if (!FileAccess.FileExists("user://savegame.save"))
 	{
-		// Set the file path where you want to load the screenshot from
-		loadFilePath = "AppData/Roaming/project_touchscreen/screenshot.png";
-
-	
+		return; // Error! We don't have a save to load.
 	}
 
-	private void LoadScreenshot()
+	// We need to revert the game state so we're not cloning objects during loading.
+	// This will vary wildly depending on the needs of a project, so take care with
+	// this step.
+	// For our example, we will accomplish this by deleting saveable objects.
+	var saveNodes = GetTree().GetNodesInGroup("Persist");
+	foreach (Node saveNode in saveNodes)
 	{
-		// Load the image from the file
-		Image screenshot = new Image();
-		Error err = screenshot.Load(loadFilePath);
-		if (err == Error.Ok)
-		{
-			// Create an ImageTexture and set the image
-			ImageTexture imageTexture = new ImageTexture();
-			imageTexture = ImageTexture.CreateFromImage(screenshot);
-
-			// Assign the texture to the TextureRect
-			textureRect.Texture = imageTexture;
-
-			GD.Print("Screenshot loaded successfully!");
-		}
-		else
-		{
-			GD.Print("Failed to load screenshot: " + err.ToString());
-		}
+		saveNode.QueueFree();
 	}
 
-	private void _on_pressed()
+	// Load the file line by line and process that dictionary to restore the object
+	// it represents.
+	using var saveGame = FileAccess.Open("user://savegame.save", FileAccess.ModeFlags.Read);
+
+	while (saveGame.GetPosition() < saveGame.GetLength())
 	{
-		LoadScreenshot();
+		var jsonString = saveGame.GetLine();
+
+		// Creates the helper class to interact with JSON
+		var json = new Json();
+		var parseResult = json.Parse(jsonString);
+		if (parseResult != Error.Ok)
+		{
+			GD.Print($"JSON Parse Error: {json.GetErrorMessage()} in {jsonString} at line {json.GetErrorLine()}");
+			continue;
+		}
+
+		// Get the data from the JSON object
+		var nodeData = new Godot.Collections.Dictionary<string, Variant>((Godot.Collections.Dictionary)json.Data);
+
+		// Firstly, we need to create the object and add it to the tree and set its position.
+		var newObjectScene = GD.Load<PackedScene>(nodeData["Filename"].ToString());
+		var newObject = newObjectScene.Instantiate<Node>();
+		GetNode(nodeData["Parent"].ToString()).AddChild(newObject);
+		newObject.Set(Node2D.PropertyName.Position, new Vector2((float)nodeData["PosX"], (float)nodeData["PosY"]));
+
+		// Now we set the remaining variables.
+		foreach (var (key, value) in nodeData)
+		{
+			if (key == "Filename" || key == "Parent" || key == "PosX" || key == "PosY")
+			{
+				continue;
+			}
+			newObject.Set(key, value);
+		}
 	}
 }
+
+private void _on_pressed()
+{
+	LoadGame();	// Replace with function body.
+}
+}
+

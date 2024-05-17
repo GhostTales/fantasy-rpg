@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bpnid44cv5fg5"]
+[gd_scene load_steps=6 format=3 uid="uid://deudsy4swksh3"]
 
 [ext_resource type="Script" path="res://scripts/quitbutton.cs" id="2_je1tr"]
 
@@ -21,6 +21,9 @@ border_width_bottom = 2
 border_color = Color(0.352941, 0.117647, 0.431373, 1)
 border_blend = true
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oc2qi"]
+size = Vector2(137, 33)
+
 [node name="quit" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -35,13 +38,24 @@ grow_vertical = 2
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
-offset_right = 132.0
-offset_bottom = 42.0
+offset_right = 131.0
+offset_bottom = 28.0
 theme = SubResource("Theme_iogxs")
 theme_override_styles/normal = SubResource("StyleBoxFlat_cm7j5")
 theme_override_styles/hover = SubResource("StyleBoxFlat_emmk8")
 text = "quit"
 script = ExtResource("2_je1tr")
 
+[node name="Area2D" type="Area2D" parent="Button"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Button/Area2D"]
+position = Vector2(65.5, 14.5)
+shape = SubResource("RectangleShape2D_oc2qi")
+
+[node name="Timer" type="Timer" parent="Button"]
+
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
+[connection signal="body_entered" from="Button/Area2D" to="Button" method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Button/Area2D" to="Button" method="_on_area_2d_body_exited"]
+[connection signal="timeout" from="Button/Timer" to="Button" method="_on_timer_timeout"]

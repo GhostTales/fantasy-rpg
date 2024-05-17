@@ -6,6 +6,8 @@ public partial class saveproject : Button
 {
 	private string saveFilePath;
 
+	private Timer delayTimer;
+	
 	public override void _Ready()
 	{
 		// Resolve the environment variable and set the file path
@@ -16,6 +18,8 @@ public partial class saveproject : Button
 		{
 			Directory.CreateDirectory(saveFilePath);
 		}
+		
+		delayTimer = GetNode<Timer>("Timer");
 	}
 
 	private void SaveScreenshot()
@@ -44,4 +48,26 @@ public partial class saveproject : Button
 	{
 		SaveScreenshot();
 	}
+	
+	private void _on_timer_timeout()
+{
+	SaveScreenshot();
 }
+
+private void _on_area_2d_body_entered(Node2D body)
+{
+	delayTimer.Start();
+}
+
+
+private void _on_area_2d_body_exited(Node2D body)
+{
+	delayTimer.Stop();
+}
+}
+
+
+
+
+
+

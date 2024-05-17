@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://bpnid44cv5fg5"]
+
+[ext_resource type="Script" path="res://scripts/quitbutton.cs" id="2_je1tr"]
+
+[sub_resource type="Theme" id="Theme_iogxs"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cm7j5"]
+bg_color = Color(0.54902, 0.470588, 0.627451, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_emmk8"]
+bg_color = Color(0.54902, 0.470588, 0.627451, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.352941, 0.117647, 0.431373, 1)
+border_blend = true
+
+[node name="quit" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_top = 14.0
+offset_right = 2.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_right = 132.0
+offset_bottom = 42.0
+theme = SubResource("Theme_iogxs")
+theme_override_styles/normal = SubResource("StyleBoxFlat_cm7j5")
+theme_override_styles/hover = SubResource("StyleBoxFlat_emmk8")
+text = "quit"
+script = ExtResource("2_je1tr")
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]

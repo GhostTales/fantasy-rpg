@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://deudsy4swksh3"]
+[gd_scene load_steps=6 format=3 uid="uid://248c2qx812uh"]
 
 [ext_resource type="Script" path="res://scripts/quitbutton.cs" id="2_je1tr"]
 
@@ -25,16 +25,9 @@ border_blend = true
 size = Vector2(137, 33)
 
 [node name="quit" type="Control"]
+custom_minimum_size = Vector2(130, 30)
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 15.0
-offset_top = 14.0
-offset_right = 2.0
-offset_bottom = -1.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
@@ -53,6 +46,7 @@ position = Vector2(65.5, 14.5)
 shape = SubResource("RectangleShape2D_oc2qi")
 
 [node name="Timer" type="Timer" parent="Button"]
+wait_time = 5.0
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Button" to="Button" method="_on_pressed"]

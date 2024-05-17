@@ -23,8 +23,8 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fbvuu"]
-size = Vector2(40, 39)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ee3p2"]
+size = Vector2(40, 40)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j40ak"]
 draw_center = false
@@ -74,8 +74,8 @@ script = ExtResource("2_2v1e7")
 [node name="Area2D" type="Area2D" parent="remove_task_button"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="remove_task_button/Area2D"]
-position = Vector2(18, 17.5)
-shape = SubResource("RectangleShape2D_fbvuu")
+position = Vector2(17, 17)
+shape = SubResource("RectangleShape2D_ee3p2")
 
 [node name="Timer" type="Timer" parent="remove_task_button"]
 

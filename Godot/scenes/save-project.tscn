@@ -71,14 +71,11 @@ border_color = Color(0.352941, 0.117647, 0.431373, 1)
 size = Vector2(135, 33)
 
 [node name="Control" type="Control"]
+custom_minimum_size = Vector2(130, 30)
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -1600.0
-offset_bottom = -900.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
+offset_right = 130.0
+offset_bottom = 30.0
 script = SubResource("CSharpScript_qb72c")
 
 [node name="SaveButton" type="Button" parent="."]

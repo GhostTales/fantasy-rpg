@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://db3774hit1vxm"]
+[gd_scene load_steps=3 format=3 uid="uid://db3774hit1vxm"]
+
+[ext_resource type="PackedScene" uid="uid://bp2o322amy2oi" path="res://scenes/calibration.tscn" id="1_5goe4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jrca3"]
 bg_color = Color(0, 0, 0, 1)
@@ -22,3 +24,18 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_jrca3")
+
+[node name="Calibration" parent="." instance=ExtResource("1_5goe4")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -65.0
+offset_top = -15.0
+offset_right = 65.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+scene = "res://scenes/main_board.tscn"

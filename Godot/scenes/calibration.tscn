@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://bp2o322amy2oi"]
+
+[ext_resource type="Script" path="res://scripts/CalibrationButton.cs" id="1_qeuod"]
+[ext_resource type="Theme" uid="uid://d2t2b2gqfpbs3" path="res://tres textures/taskbar button.tres" id="2_am6fb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xk3or"]
+bg_color = Color(0.54902, 0.470588, 0.627451, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ynuk2"]
+bg_color = Color(0.54902, 0.470588, 0.627451, 1)
+border_color = Color(0.352941, 0.117647, 0.431373, 1)
+
+[node name="Calibration" type="Control"]
+custom_minimum_size = Vector2(130, 30)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_qeuod")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_right = 130.0
+offset_bottom = 28.0
+theme = ExtResource("2_am6fb")
+theme_override_styles/normal = SubResource("StyleBoxFlat_xk3or")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ynuk2")
+text = "Calibration"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

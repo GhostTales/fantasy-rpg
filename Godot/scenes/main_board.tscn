@@ -16,6 +16,9 @@ anchors_preset = 0
 [node name="Taskbar" parent="." instance=ExtResource("1_0v3jw")]
 layout_mode = 0
 
+[node name="reconnect colorDetect" parent="Taskbar/HBoxContainer" index="3" node_paths=PackedStringArray("Client")]
+Client = NodePath("../../../WebSocketClient")
+
 [node name="board_Row" parent="." instance=ExtResource("1_afhiy")]
 layout_mode = 0
 offset_left = 25.0
@@ -36,9 +39,12 @@ script = ExtResource("5_xrvwo")
 url = "localhost:8080/colorTracking"
 
 [node name="Cursor" parent="WebSocketClient" node_paths=PackedStringArray("Client") instance=ExtResource("3_0b6gm")]
+position = Vector2(800, 450)
 Client = NodePath("..")
 speed = 50.0
 
 [connection signal="body_entered" from="board_Row/Area2D" to="board_Row" method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="board_Row/Area2D" to="board_Row" method="_on_area_2d_body_exited"]
 [connection signal="timeout" from="board_Row/Timer" to="board_Row" method="_on_timer_timeout"]
+
+[editable path="Taskbar"]

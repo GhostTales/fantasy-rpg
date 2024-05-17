@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://b456r1r264grs"]
+[gd_scene load_steps=6 format=3 uid="uid://b456r1r264grs"]
 
 [ext_resource type="PackedScene" uid="uid://5jdnylkfeu71" path="res://scenes/load-project.tscn" id="1_pa00j"]
 [ext_resource type="PackedScene" uid="uid://sshihd7hsi2d" path="res://scenes/save-project.tscn" id="2_06yn6"]
-[ext_resource type="PackedScene" uid="uid://deudsy4swksh3" path="res://scenes/quit.tscn" id="3_hph23"]
+[ext_resource type="PackedScene" uid="uid://248c2qx812uh" path="res://scenes/quit.tscn" id="3_hph23"]
+[ext_resource type="PackedScene" uid="uid://1t3tweddpycn" path="res://scenes/reconnect_color_detect.tscn" id="4_02dvp"]
+[ext_resource type="PackedScene" uid="uid://bp2o322amy2oi" path="res://scenes/calibration.tscn" id="5_cbljb"]
 
 [node name="Taskbar" type="Control"]
 layout_mode = 3
@@ -10,23 +12,24 @@ anchors_preset = 0
 offset_right = 1.0
 offset_bottom = 1.0
 
-[node name="load" parent="." instance=ExtResource("1_pa00j")]
-layout_mode = 1
-offset_left = 141.0
-offset_top = 5.0
-offset_right = 141.0
-offset_bottom = 5.0
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 25.0
+offset_right = 691.0
+offset_bottom = 40.0
 
-[node name="save" parent="." instance=ExtResource("2_06yn6")]
-layout_mode = 1
-offset_left = 5.0
-offset_top = 5.0
-offset_right = 4.0
-offset_bottom = 4.0
+[node name="quit" parent="HBoxContainer" instance=ExtResource("3_hph23")]
+layout_mode = 2
 
-[node name="quit" parent="." instance=ExtResource("3_hph23")]
-layout_mode = 1
-offset_left = 277.0
-offset_top = 5.0
-offset_right = 276.0
-offset_bottom = 4.0
+[node name="save" parent="HBoxContainer" instance=ExtResource("2_06yn6")]
+layout_mode = 2
+
+[node name="load" parent="HBoxContainer" instance=ExtResource("1_pa00j")]
+layout_mode = 2
+
+[node name="reconnect colorDetect" parent="HBoxContainer" instance=ExtResource("4_02dvp")]
+layout_mode = 2
+
+[node name="Calibration" parent="HBoxContainer" instance=ExtResource("5_cbljb")]
+layout_mode = 2
+scene = "res://scenes/calibration_screen.tscn"

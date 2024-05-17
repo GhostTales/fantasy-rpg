@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dxrbrvxvd2k1a"]
+[gd_scene load_steps=5 format=3 uid="uid://dxrbrvxvd2k1a"]
 
 [ext_resource type="PackedScene" uid="uid://b456r1r264grs" path="res://scenes/Taskbar.tscn" id="1_0v3jw"]
 [ext_resource type="PackedScene" uid="uid://b5mtb3wahsgyl" path="res://scenes/board_row.tscn" id="1_afhiy"]
-[ext_resource type="PackedScene" uid="uid://duyq3mbefq2um" path="res://scenes/cursor.tscn" id="3_0b6gm"]
-[ext_resource type="Script" path="res://scripts/WebSocketClient.cs" id="5_xrvwo"]
+[ext_resource type="PackedScene" uid="uid://cpgddpusrwvb0" path="res://scenes/web_socket_client.tscn" id="3_0ntf1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6ru7c"]
 size = Vector2(80, 80)
@@ -16,8 +15,9 @@ anchors_preset = 0
 [node name="Taskbar" parent="." instance=ExtResource("1_0v3jw")]
 layout_mode = 0
 
-[node name="reconnect colorDetect" parent="Taskbar/HBoxContainer" index="3" node_paths=PackedStringArray("Client")]
-Client = NodePath("../../../WebSocketClient")
+[node name="reconnect colorDetect" parent="Taskbar/HBoxContainer" index="3" node_paths=PackedStringArray("parent")]
+Client = ExtResource("3_0ntf1")
+parent = NodePath("../../..")
 
 [node name="board_Row" parent="." instance=ExtResource("1_afhiy")]
 layout_mode = 0
@@ -34,14 +34,7 @@ shape = SubResource("RectangleShape2D_6ru7c")
 
 [node name="Timer" type="Timer" parent="board_Row"]
 
-[node name="WebSocketClient" type="Node" parent="."]
-script = ExtResource("5_xrvwo")
-url = "localhost:8080/colorTracking"
-
-[node name="Cursor" parent="WebSocketClient" node_paths=PackedStringArray("Client") instance=ExtResource("3_0b6gm")]
-position = Vector2(800, 450)
-Client = NodePath("..")
-speed = 50.0
+[node name="WebSocketClient" parent="." instance=ExtResource("3_0ntf1")]
 
 [connection signal="body_entered" from="board_Row/Area2D" to="board_Row" method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="board_Row/Area2D" to="board_Row" method="_on_area_2d_body_exited"]

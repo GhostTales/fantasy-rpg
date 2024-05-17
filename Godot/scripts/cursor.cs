@@ -3,7 +3,6 @@ using System;
 
 public partial class cursor : CharacterBody2D
 {
-	[Export]
 	WebSocketClient Client;
 	[Export]
 	float speed = 25;
@@ -14,6 +13,11 @@ public partial class cursor : CharacterBody2D
 	float verticalLength;
 	float horizontalLength;
 	string[] packetParts;
+
+	public override void _Ready()
+	{
+		Client = (GetParent() as WebSocketClient);
+	}
 
 	public override void _Process(double delta)
 	{

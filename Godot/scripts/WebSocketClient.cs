@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 public partial class WebSocketClient : Node
 {
     [Export]
-    string url;
+    string url = "localhost:8080/colorTracking";
     WebSocketPeer Client;
     public string packet { get; set; }
 

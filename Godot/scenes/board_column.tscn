@@ -60,6 +60,8 @@ text = "NEW TASK"
 points = PackedVector2Array(50, 115, 275, 115)
 width = 2.0
 
+[node name="Timer" type="Timer" parent="task_adder"]
+
 [node name="Button" type="Button" parent="task_adder"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 0
@@ -74,8 +76,6 @@ theme_override_styles/disabled = ExtResource("6_jf7be")
 theme_override_styles/focus = ExtResource("7_h2nmx")
 icon = ExtResource("8_0y6qb")
 icon_alignment = 1
-
-[node name="Timer" type="Timer" parent="task_adder"]
 
 [node name="Area2D" type="Area2D" parent="task_adder"]
 
@@ -149,8 +149,8 @@ shape = SubResource("RectangleShape2D_deanc")
 
 [node name="Timer" type="Timer" parent="Coloum"]
 
-[connection signal="pressed" from="task_adder/Button" to="task_adder" method="_on_button_pressed"]
 [connection signal="timeout" from="task_adder/Timer" to="task_adder" method="_on_timer_timeout"]
+[connection signal="pressed" from="task_adder/Button" to="task_adder" method="_on_button_pressed"]
 [connection signal="body_entered" from="task_adder/Area2D" to="task_adder" method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="task_adder/Area2D" to="task_adder" method="_on_area_2d_body_exited"]
 [connection signal="pressed" from="Coloum/Button" to="Coloum" method="_on_button_pressed"]

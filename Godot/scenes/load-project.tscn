@@ -24,12 +24,11 @@ script = ExtResource("1_8bwhb")
 [node name="LoadButton" type="Button" parent="."]
 layout_mode = 0
 offset_right = 130.0
-offset_bottom = 30.0
+offset_bottom = 28.0
 theme = ExtResource("2_c74u4")
 theme_override_styles/normal = SubResource("StyleBoxFlat_bh1ol")
 theme_override_styles/hover = SubResource("StyleBoxFlat_ct6ga")
 text = "load project"
 script = ExtResource("1_8bwhb")
-theme_override_styles/normal = SubResource("StyleBoxFlat_bh1ol")
 
 [connection signal="pressed" from="LoadButton" to="LoadButton" method="_on_pressed"]

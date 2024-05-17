@@ -30,7 +30,6 @@ position = Vector2(37, 37)
 shape = SubResource("RectangleShape2D_6ru7c")
 
 [node name="Timer" type="Timer" parent="board_Row"]
-wait_time = 2.0
 
 [node name="WebSocketClient" type="Node" parent="."]
 script = ExtResource("5_xrvwo")

@@ -1,52 +1,73 @@
 using Godot;
 using System;
+using System.IO;
 
-public partial class SaveButton2 : Button
+public partial class saveproject : Button
 {
-// Note: This can be called from anywhere inside the tree. This function is
-// path independent.
-// Go through everything in the persist category and ask them to return a
-// dict of relevant variables.
-public void SaveGame()
-{
-	using var saveGame = FileAccess.Open("user://savegame.save", FileAccess.ModeFlags.Write);
+	private string saveFilePath;
 
-	var saveNodes = GetTree().GetNodesInGroup("Persist");
-	foreach (Node saveNode in saveNodes)
-	{
-		// Check the node is an instanced scene so it can be instanced again during load.
-		if (string.IsNullOrEmpty(saveNode.SceneFilePath))
-		{
-			GD.Print($"persistent node '{saveNode.Name}' is not an instanced scene, skipped");
-			continue;
-		}
-
-		// Check the node has a save function.
-		if (!saveNode.HasMethod("Save"))
-		{
-			GD.Print($"persistent node '{saveNode.Name}' is missing a Save() function, skipped");
-			continue;
-		}
-
-		// Call the node's save function.
-		var nodeData = saveNode.Call("Save");
-
-		// Json provides a static method to serialized JSON string.
-		var jsonString = Json.Stringify(nodeData);
-
-		// Store the save dictionary as a new line in the save file.
-		saveGame.StoreLine(jsonString);
-	}
-}
+	private Timer delayTimer;
 	
+	public override void _Ready()
+	{
+		// Resolve the environment variable and set the file path
+		saveFilePath = System.Environment.GetEnvironmentVariable("APPDATA") + "/project_touchscreen";
+
+		// Ensure the directory exists
+		if (!Directory.Exists(saveFilePath))
+		{
+			Directory.CreateDirectory(saveFilePath);
+		}
+		
+		delayTimer = GetNode<Timer>("Timer");
+	}
+
+	private void SaveScreenshot()
+	{
+		// Capture the current scene as an image
+		Viewport rootViewport = GetViewport();
+		Image screenshot = rootViewport.GetTexture().GetImage();
 
 
+		// Generate a unique file name for the screenshot (e.g., based on timestamp)
+		string screenshotName = "screenshot_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".png";
 
-private void _on_pressed()
+		// Construct the full file path for saving
+		string screenshotPath = Path.Combine(saveFilePath, screenshotName);
+
+		// Save the screenshot image to the file path
+		Error err = screenshot.SavePng(screenshotPath);
+		if (err != Error.Ok)
+		{
+			GD.PrintErr("Failed to save screenshot: " + err.ToString());
+		}
+		else GD.Print("Saved screenshot");
+	}
+		
+	private void _on_pressed()
+	{
+		SaveScreenshot();
+	}
+	
+	private void _on_timer_timeout()
 {
-	SaveGame();	// Replace with function body.
+	SaveScreenshot();
+}
+
+private void _on_area_2d_body_entered(Node2D body)
+{
+	delayTimer.Start();
+}
+
+
+private void _on_area_2d_body_exited(Node2D body)
+{
+	delayTimer.Stop();
 }
 }
+
+
+
 
 
 

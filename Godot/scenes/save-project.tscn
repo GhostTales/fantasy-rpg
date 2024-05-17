@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://sshihd7hsi2d"]
+[gd_scene load_steps=7 format=3 uid="uid://sshihd7hsi2d"]
 
 [ext_resource type="Script" path="res://scripts/saveproject.cs" id="1_20d0q"]
 [ext_resource type="Theme" uid="uid://d2t2b2gqfpbs3" path="res://tres textures/taskbar button.tres" id="1_uk28d"]
@@ -67,6 +67,9 @@ border_blend = true
 bg_color = Color(0.54902, 0.470588, 0.627451, 1)
 border_color = Color(0.352941, 0.117647, 0.431373, 1)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a53yd"]
+size = Vector2(135, 33)
+
 [node name="Control" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -81,11 +84,22 @@ script = SubResource("CSharpScript_qb72c")
 [node name="SaveButton" type="Button" parent="."]
 layout_mode = 0
 offset_right = 130.0
-offset_bottom = 30.0
+offset_bottom = 28.0
 theme = ExtResource("1_uk28d")
 theme_override_styles/normal = SubResource("StyleBoxFlat_k64o2")
 theme_override_styles/hover = SubResource("StyleBoxFlat_y1d2g")
 text = "save project"
 script = ExtResource("1_20d0q")
 
+[node name="Area2D" type="Area2D" parent="SaveButton"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SaveButton/Area2D"]
+position = Vector2(64.5, 14.5)
+shape = SubResource("RectangleShape2D_a53yd")
+
+[node name="Timer" type="Timer" parent="SaveButton"]
+
 [connection signal="pressed" from="SaveButton" to="SaveButton" method="_on_pressed"]
+[connection signal="body_entered" from="SaveButton/Area2D" to="SaveButton" method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="SaveButton/Area2D" to="SaveButton" method="_on_area_2d_body_exited"]
+[connection signal="timeout" from="SaveButton/Timer" to="SaveButton" method="_on_timer_timeout"]
